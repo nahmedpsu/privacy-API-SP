@@ -1,0 +1,44 @@
+# Local credentials and configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*
+secrets*
+config.local.*
+
+# Operational/restricted artifacts: never commit
+private/
+restricted/
+data/
+evidence/
+results/
+reports/
+*.log
+*.har
+*.sqlite*
+*.db
+*.csv
+*.xlsx
+*.pdf
+*.docx
+*.zip
+*.tar*
+
+# Python, builds and editor files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+build/
+dist/
+.idea/
+.vscode/
+.DS_Store

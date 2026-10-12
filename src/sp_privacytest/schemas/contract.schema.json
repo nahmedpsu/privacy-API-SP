@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SP-PrivacyTest offline contract scaffold",
+  "description": "Structural specification only. No approval or privacy conformance is established by validation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "contract_id", "family_id", "fixture_kind",
+    "requirement_ref", "policy_revision", "system_release_ref",
+    "owner_authorization_ref", "endpoint", "principal_ref",
+    "entitlement_profile_ref", "authentication_state", "cohort_ref",
+    "processing_basis_ref", "state_transition_ref", "representation",
+    "expected_decision", "record_rule_ref", "field_rule_ref",
+    "required_evidence", "external_call_permission"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1"},
+    "contract_id": {"$ref": "#/$defs/reference"},
+    "family_id": {"type": "string", "pattern": "^IBR-(0[1-9]|1[0-8])$"},
+    "fixture_kind": {"enum": ["illustrative_configuration", "owner_controlled_contract"]},
+    "requirement_ref": {"$ref": "#/$defs/reference"},
+    "policy_revision": {"$ref": "#/$defs/reference"},
+    "system_release_ref": {"$ref": "#/$defs/reference"},
+    "owner_authorization_ref": {"$ref": "#/$defs/reference"},
+    "endpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "path"],
+      "properties": {
+        "method": {"enum": ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]},
+        "path": {
+          "type": "string",
+          "maxLength": 256,
+          "pattern": "^/(?:[A-Za-z0-9_{}-]+/?)*$",
+          "description": "Relative template only; no hosts, query strings, credentials or actual identifiers."
+        }
+      }
+    },
+    "principal_ref": {"$ref": "#/$defs/reference"},
+    "entitlement_profile_ref": {"$ref": "#/$defs/reference"},
+    "authentication_state": {
+      "enum": ["anonymous", "authenticated", "invalid_token", "expired_token", "mfa_pending", "disabled", "logged_out"]
+    },
+    "cohort_ref": {"$ref": "#/$defs/reference"},
+    "processing_basis_ref": {"$ref": "#/$defs/reference"},
+    "state_transition_ref": {"$ref": "#/$defs/reference"},
+    "representation": {"enum": ["json", "xlsx", "pdf", "none"]},
+    "expected_decision": {"enum": ["allow", "deny", "evidence_gate"]},
+    "record_rule_ref": {"$ref": "#/$defs/reference"},
+    "field_rule_ref": {"$ref": "#/$defs/reference"},
+    "required_evidence": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"enum": ["response_decision", "record_scope", "field_scope", "authentication_state", "audit_event", "upstream_trace", "provenance", "cache_state", "transition_time"]}
+    },
+    "external_call_permission": {"const": false}
+  },
+  "$defs": {
+    "reference": {
+      "type": "string", "minLength": 1, "maxLength": 100,
+      "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$",
+      "description": "Non-sensitive alias. Resolved only within an owner-controlled environment."
+    }
+  }
+}

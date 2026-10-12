@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sp-privacytest"
+version = "0.1.0.dev0"
+description = "Offline contract scaffold for social protection API privacy-conformance research"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{name = "nahmedpsu"}]
+dependencies = ["jsonschema==4.25.1"]
+
+[project.scripts]
+sp-privacytest = "sp_privacytest.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+sp_privacytest = ["schemas/*.json"]

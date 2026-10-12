@@ -1,0 +1,23 @@
+{
+  "schema_version": "0.1",
+  "contract_id": "example-record-scope",
+  "family_id": "IBR-07",
+  "fixture_kind": "illustrative_configuration",
+  "requirement_ref": "example-record-rule",
+  "policy_revision": "example-unapproved",
+  "system_release_ref": "example-no-deployment",
+  "owner_authorization_ref": "example-not-authorized",
+  "endpoint": {"method": "GET", "path": "/example/records"},
+  "principal_ref": "example-research-account",
+  "entitlement_profile_ref": "example-profile",
+  "authentication_state": "authenticated",
+  "cohort_ref": "example-no-beneficiary-data",
+  "processing_basis_ref": "example-owner-decision-required",
+  "state_transition_ref": "example-no-transition",
+  "representation": "json",
+  "expected_decision": "allow",
+  "record_rule_ref": "example-record-rule",
+  "field_rule_ref": "example-field-rule",
+  "required_evidence": ["response_decision", "record_scope", "field_scope", "provenance"],
+  "external_call_permission": false
+}
